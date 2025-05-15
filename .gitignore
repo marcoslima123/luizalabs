@@ -1,0 +1,15 @@
+# Node
+node_modules
+dist
+
+# MacOS
+.DS_Store
+
+# Ignorar dist das packages (core, api, etc)
+packages/core/dist
+packages/api/dist
+packages/*/node_modules
+
+# Builds
+dist
+packages/*/dist

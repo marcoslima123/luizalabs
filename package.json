@@ -1,0 +1,9 @@
+{
+  "name": "monorepo",
+  "private": true,
+  "workspaces": ["packages/*"],
+  "scripts": {
+    "build": "yarn workspace @normalizer/core build",
+    "dev": "yarn workspace luizalabs dev"
+  }
+}

@@ -1,0 +1,50 @@
+<body>
+  <h2>Pedidos Normalizados</h2>
+  <div>
+    <label>
+      Order ID:
+      <input type="text" id="order_id" placeholder="Ex: 1001">
+    </label>
+    <label>
+      Data início:
+      <input type="date" id="start_date">
+    </label>
+    <label>
+      Data fim:
+      <input type="date" id="end_date">
+    </label>
+    <button onclick="fetchData()">Filtrar</button>
+  </div>
+
+  <pre id="json">Carregando dados...</pre>
+
+  <script>
+    function buildQuery() {
+      const orderId = document.getElementById('order_id').value;
+      const start = document.getElementById('start_date').value;
+      const end = document.getElementById('end_date').value;
+
+      const params = new URLSearchParams();
+      if (orderId) params.append('order_id', orderId);
+      if (start) params.append('start_date', start);
+      if (end) params.append('end_date', end);
+
+      return params.toString();
+    }
+
+    async function fetchData() {
+      const query = buildQuery();
+      const url = '/orders' + (query ? `?${query}` : '');
+
+      try {
+        const res = await fetch(url);
+        const data = await res.json();
+        document.getElementById('json').textContent = JSON.stringify(data, null, 2);
+      } catch (err) {
+        document.getElementById('json').textContent = 'Erro ao buscar dados: ' + err;
+      }
+    }
+
+    fetchData();
+  </script>
+</body>
